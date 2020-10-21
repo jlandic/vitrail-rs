@@ -32,8 +32,8 @@ impl Modifier for PluralizeModifier {
                 } else {
                     format!("{}s", source)
                 }
-            },
-            Some(_) => format!("{}s", source)
+            }
+            Some(_) => format!("{}s", source),
         }
     }
 }
@@ -44,55 +44,58 @@ mod tests {
 
     #[test]
     fn capitalize_empty_string() {
-        let modifier = CapitalizeModifier{};
+        let modifier = CapitalizeModifier {};
         assert_eq!(modifier.apply(""), "");
     }
 
     #[test]
     fn capitalize_valid_string() {
-        let modifier = CapitalizeModifier{};
-        assert_eq!(modifier.apply("capitalize me please"), "Capitalize me please");
+        let modifier = CapitalizeModifier {};
+        assert_eq!(
+            modifier.apply("capitalize me please"),
+            "Capitalize me please"
+        );
     }
 
     #[test]
     fn pluralize_empty_string() {
-        let modifier = PluralizeModifier{};
+        let modifier = PluralizeModifier {};
         assert_eq!(modifier.apply(""), "");
     }
 
     #[test]
     fn pluralize_s_ending() {
-        let modifier = PluralizeModifier{};
+        let modifier = PluralizeModifier {};
         assert_eq!(modifier.apply("princess"), "princesses");
     }
 
     #[test]
     fn pluralize_h_ending() {
-        let modifier = PluralizeModifier{};
+        let modifier = PluralizeModifier {};
         assert_eq!(modifier.apply("bush"), "bushes");
     }
 
     #[test]
     fn pluralize_x_ending() {
-        let modifier = PluralizeModifier{};
+        let modifier = PluralizeModifier {};
         assert_eq!(modifier.apply("sphinx"), "sphinxes");
     }
 
     #[test]
     fn pluralize_y_ending_after_vowel() {
-        let modifier = PluralizeModifier{};
+        let modifier = PluralizeModifier {};
         assert_eq!(modifier.apply("matey"), "mateys");
     }
 
     #[test]
     fn pluralize_y_ending_after_consonant() {
-        let modifier = PluralizeModifier{};
+        let modifier = PluralizeModifier {};
         assert_eq!(modifier.apply("party"), "parties");
     }
 
     #[test]
     fn pluralize_other() {
-        let modifier = PluralizeModifier{};
+        let modifier = PluralizeModifier {};
         assert_eq!(modifier.apply("word"), "words");
     }
 }
