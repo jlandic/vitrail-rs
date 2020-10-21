@@ -1,5 +1,7 @@
 # Vitrail
 
+[![License](https://img.shields.io/github/license/jlandic/vitrail?style=flat-square)](https://opensource.org/licenses/MIT)
+
 ## Introduction
 
 `Vitrail` is a text generator using context-free grammars, inspired by projects like [Tracery](https://github.com/galaxykate/tracery), or [Grammy](https://github.com/AlmasB/grammy).
