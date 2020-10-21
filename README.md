@@ -1,5 +1,6 @@
 # Vitrail
 
+![Build](https://img.shields.io/github/workflow/status/jlandic/vitrail-rs/Rust/master?style=flat-square&logo=github-actions)
 [![License](https://img.shields.io/github/license/jlandic/vitrail?style=flat-square)](https://opensource.org/licenses/MIT)
 
 ## Introduction
