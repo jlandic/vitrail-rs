@@ -1,0 +1,29 @@
+{
+  "root": [
+      "[character>subject]Let's {speak} about {subject}. Did you know that {subject} {verb} {object:s:capitalize}?"
+  ],
+  "speak": [
+      "speak",
+      "babble",
+      "talk"
+  ],
+  "character": [
+      "Alice",
+      "Bob",
+      "Eve"
+  ],
+  "verb": [
+      "shared",
+      "ate",
+      "saw",
+      "destroyed",
+      "stole",
+      "lost"
+  ],
+  "object": [
+      "the apple",
+      "the banana",
+      "the pancake",
+      "a cinnamon roll"
+  ]
+}
