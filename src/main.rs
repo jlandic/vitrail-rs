@@ -1,7 +1,6 @@
 pub mod config;
 pub mod grammar;
 pub mod modifier;
-pub mod random;
 
 use config::GrammarSyntax;
 use grammar::Grammar;

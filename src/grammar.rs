@@ -1,10 +1,12 @@
+use rand::rngs::SmallRng;
+use rand::Rng;
+use rand_seeder::Seeder;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::Read;
 
 use crate::config::GrammarSyntax;
 use crate::modifier::Modifier;
-use crate::random::SeededRng;
 
 /// By default, the grammar will be expanded starting from a symbol named `root`
 const DEFAULT_ROOT_KEY: &str = "root";
@@ -17,7 +19,7 @@ pub struct Grammar<'a> {
     /// The syntax to be used to interpret the grammar rules
     pub syntax: GrammarSyntax,
     /// A seeded random number generator instance, to generate reproducible results
-    pub rng: SeededRng,
+    pub rng: SmallRng,
     /// The modifiers featured for the grammar, expressed as a map of modifier name (used as function name in the rules) => the corresponding modifier implementation
     pub modifiers: HashMap<String, &'a dyn Modifier>,
 }
@@ -49,7 +51,7 @@ impl<'a> Grammar<'a> {
         Self {
             symbols,
             syntax,
-            rng: SeededRng::new(seed),
+            rng: Seeder::from(seed).make_rng(),
             modifiers: HashMap::new(),
         }
     }
@@ -120,21 +122,24 @@ impl<'a> Grammar<'a> {
     /// Panics if the symbol cannot be found in the grammar.
     pub fn derive_symbol(&mut self, symbol: &str) -> String {
         match self.symbols.get(symbol) {
-            Some(derivations) => self
-                .rng
-                .random_entry(derivations)
-                .unwrap_or_else(|| {
-                    panic!(
-                        "Unable to expand. Symbol '{}' does not exist in the ruleset.",
-                        symbol,
-                    )
-                })
-                .to_string(),
+            Some(derivations) => {
+                let random_index = self.rng.gen_range(0..derivations.len());
+
+                derivations
+                    .get(random_index)
+                    .unwrap_or_else(|| {
+                        panic!(
+                            "Unable to expand. Symbol '{}' does not exist in the ruleset.",
+                            symbol,
+                        )
+                    })
+                    .to_string()
+            }
             None => {
-                panic!(format!(
+                panic!(
                     "Unable to expand. Symbol '{}' does not exist in the ruleset.",
                     symbol,
-                ));
+                );
             }
         }
     }
