@@ -49,7 +49,7 @@ impl GrammarSyntax {
 
     /// Returns whether the given symbol is terminal (its value is intrinsic, and will not be expanded), according to the grammar syntax configuration
     pub fn is_terminal(&self, symbol: &str) -> bool {
-        !self.is_non_terminal(&symbol)
+        !self.is_non_terminal(symbol)
     }
 }
 
