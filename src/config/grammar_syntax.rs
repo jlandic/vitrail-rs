@@ -66,7 +66,7 @@ mod tests {
     #[test]
     fn has_modifier_when_false() {
         let syntax = GrammarSyntax::default();
-        assert!(syntax.has_modifier("nomodifier") == false)
+        assert!(!syntax.has_modifier("nomodifier"))
     }
 
     #[test]
@@ -78,13 +78,13 @@ mod tests {
     #[test]
     fn is_non_terminal_when_terminal() {
         let syntax = GrammarSyntax::default();
-        assert!(syntax.is_non_terminal("I am terminal") == false);
+        assert!(!syntax.is_non_terminal("I am terminal"));
     }
 
     #[test]
     fn is_terminal_when_non_terminal() {
         let syntax = GrammarSyntax::default();
-        assert!(syntax.is_terminal("I {verb} non-terminal") == false);
+        assert!(!syntax.is_terminal("I {verb} non-terminal"));
     }
 
     #[test]

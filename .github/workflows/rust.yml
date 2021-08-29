@@ -16,11 +16,24 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build
-      run: cargo build --verbose
-    - name: Run clippy
-      run: cargo clippy -- -Dwarnings
-    - name: Run fmt
-      run: cargo fmt -- --check
+    - name: Install minimal stable with clippy and rustfmt
+      uses: actions-rs/toolchain@v1
+      with:
+        profile: minimal
+        toolchain: stable
+        components: rustfmt, clippy
+    - name: Run cargo fmt
+        uses: actions-rs/cargo@v1
+        with:
+          command: fmt
+          args: --all -- --check
+
+    - name: Run cargo clippy
+      uses: actions-rs/cargo@v1
+      with:
+        command: clippy
+        args: -- -D warnings
     - name: Run tests
-      run: cargo test --verbose
+      uses: actions-rs/cargo@v1
+      with:
+        command: test
