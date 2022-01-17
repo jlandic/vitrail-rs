@@ -172,9 +172,9 @@ impl<'a> Grammar<'a> {
 
                 return format!(
                     "{}{}{}",
-                    symbol[0..symbol_start_idx - 1].to_string(),
+                    &symbol[0..symbol_start_idx - 1],
                     expansion,
-                    symbol[i + 1..].to_string(),
+                    &symbol[i + 1..],
                 );
             } else if character == self.syntax.capture_end {
                 let key = symbol[capture_start_idx..i].to_string();
